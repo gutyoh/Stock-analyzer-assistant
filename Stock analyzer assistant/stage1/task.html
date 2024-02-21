@@ -1,0 +1,47 @@
+<h2>Description</h2>
+
+<p>In the project&#39;s first stage, you&#39;ll create the Stock Analyzer Assistant by giving it a <code>name</code> and <code>instructions</code>. You&#39;ll also create a <code>Thread</code> object where you will be able to interact and communicate with the assistant, and finally, you&#39;ll start a <code>Run</code> instance to execute the assistant and process the user&#39;s prompts; this basic configuration will set the stage for the assistant&#39;s future development and functionality.</p>
+
+<h2>Objectives</h2>
+
+<p>Your primary task is initializing and configuring the Stock Analyzer Assistant using the OpenAI API. This involves the creation of an assistant instance, setting up a communication thread, and initiating a run to execute the instructions from a simple prompt. Here&#39;s a step-by-step guide to achieve this:</p>
+
+<p><strong>1. Set up the Assistant:</strong> Begin by configuring the assistant. Set a <code>name</code> and <code>instructions</code> for the assistant. Use the <code><a href="https://platform.openai.com/docs/api-reference/assistants/createAssistant" rel="noopener noreferrer nofollow">assistants.create()</a></code> method to create the assistant. For this scenario, set <code>stock_analyzer_assistant</code> as the <code>name</code> of the assistant and for the <code>instructions</code> use the following string:</p>
+
+<pre>
+<code class="language-no-highlight">"You're an experienced stock analyzer assistant tasked with analyzing and visualizing stock market data."</code></pre>
+
+<p><strong>2. Validate assistant existence:</strong> Implement a check to determine if an assistant named <code>stock_analyzer_assistant</code> already exists. If it does, use the existing assistant; if not, proceed to create a new assistant with this name. You can achieve this by leveraging the <code><a href="https://platform.openai.com/docs/api-reference/assistants/listAssistants" rel="noopener noreferrer nofollow">assistants.list()</a></code> method to search for existing assistants.</p>
+
+<p><strong>3. Create a Thread object:</strong> Once the assistant setup is confirmed, create a <code>Thread</code> object; this thread serves as a conversation context where the assistant receives tasks and returns responses. Utilize the <code><a href="https://platform.openai.com/docs/api-reference/threads/createThread" rel="noopener noreferrer nofollow">threads.create()</a></code> method to accomplish this step.</p>
+
+<p><strong>4. Send a message to the Thread:</strong> Make use of the <code><a href="https://platform.openai.com/docs/api-reference/messages/createMessage" rel="noopener noreferrer nofollow">threads.messages.create()</a></code> method to send a message to the thread. You can send any message you want as the response from the assistant won&#39;t be checked, but we suggest that you send a message with a short prompt like:</p>
+
+<pre>
+<code class="language-no-highlight">"Tell me your name and instructions. YOU MUST Provide a DIRECT and SHORT response."</code></pre>
+
+<p><strong>5. Execute a Run Instance:</strong> Finally, execute a <code>Run</code> instance by linking the thread with the assistant ID. This action triggers the assistant&#39;s processing of the user&#39;s request. The execution can be initiated using the <code><a href="https://platform.openai.com/docs/api-reference/runs/createRun" rel="noopener noreferrer nofollow">threads.runs.create()</a></code> method with the thread and assistant ID information.</p>
+
+<h2>Examples</h2>
+
+<p><strong>Example 1: Creating and executing the assistant</strong></p>
+
+<p>When you run the Python program, the Assistant should be created (if it does not exist), and a <code>Thread</code> should be initiated. After sending a message to the <code>Thread</code> object, a <code>Run</code> instance should be executed to start the analysis:</p>
+
+<pre>
+<code class="language-no-highlight">No matching `stock_analyzer_assistant` assistant found, creating a new assistant with ID: asst_t03xkYG47OcKmt2wNP6CPOiY
+Thread created with ID: thread_FFOOs1l4M4GT8cgMIjan7nHn
+Run initiated with ID: run_xyFXFGkpTpaEb1P9MHlyDt4d
+</code></pre>
+
+<p><strong>Example 2: Assistant already exists</strong></p>
+
+<p>If the Assistant already exists, your program should use the existing <code>stock_analyzer_assistant</code> to create a <code>Thread</code> and execute the <code>Run</code> instance:</p>
+
+<pre>
+<code class="language-no-highlight">Matching `stock_analyzer_assistant` assistant found, using the first matching assistant with ID: asst_t03xkYG47OcKmt2wNP6CPOiY
+Thread created with ID: thread_EEOOs1l4M4GT8cgMIjan7nHn
+Run initiated with ID: run_abFXFGkpTpaEb1P9MHlyDt4d
+</code></pre>
+
+<p>Ensure that your program outputs all necessary information, including the creation of the assistant, the Thread, and the Run instance, following the specified formats for IDs and messages.</p>
